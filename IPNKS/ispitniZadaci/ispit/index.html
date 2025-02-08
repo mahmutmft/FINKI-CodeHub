@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .playerCards {
+            border: 1px solid black;
+            padding: 40px;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .card {
+            border-radius: 10px;
+            width: 150px;
+            height: 200px;
+            text-align: center;
+        }
+
+        .card p {
+            margin: 20px 0 20px 0;
+        }
+
+        .cards {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .game {
+            width: 150px;
+            height: 150px;
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .game img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .left {
+            width: 49%;
+            border: 1px solid black;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .splitScreen {
+            margin: 20px;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+
+        .right {
+            width: 49%;
+            border: 1px solid black;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chartsRow {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        #typeChart, #sumChart {
+            width: 250px;
+            height: 180px;
+            border-radius: 8px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="splitScreen">
+    <div class="left">
+        <h1>Start Game</h1>
+        <div class="game">
+            <img id="game-image" src="1.jpg" alt="Game Image">
+        </div>
+        <button id="start-game" onclick="startGame()">Start Game</button>
+        <div id="result"></div>
+    </div>
+    <div class="right">
+        <h1>Show Stats</h1>
+        <button onclick="showStats()">Show Stats</button>
+        <div class="chartsRow">
+            <div id="typeChart"></div>
+            <div id="sumChart"></div>
+        </div>
+
+    </div>
+</div>
+<div class="playerCards">
+    <h1>Players</h1>
+    <div class="cards"></div>
+</div>
+<script>
+    let data = {
+        "players": [
+            {
+                "name": "Alice",
+                "nickname": "alice5",
+                "type": 1,
+                "amount": 150,
+                "symbol": "fire"
+            },
+            {
+                "name": "Bob",
+                "nickname": "bobster@",
+                "type": 3,
+                "amount": 200,
+                "symbol": "ice"
+            },
+            {
+                "name": "Charlie",
+                "nickname": "charli35",
+                "type": 2,
+                "amount": 300,
+                "symbol": "water"
+            },
+            {
+                "name": "Diana",
+                "nickname": "diana5",
+                "type": 4,
+                "amount": 250,
+                "symbol": "earth"
+            },
+            {
+                "name": "Evan",
+                "nickname": "evan5",
+                "type": 1,
+                "amount": 180,
+                "symbol": "fire"
+            },
+            {
+                "name": "Fiona",
+                "nickname": "fiona",
+                "type": 3,
+                "amount": 220,
+                "symbol": "ice"
+            },
+            {
+                "name": "George",
+                "nickname": "george",
+                "type": 2,
+                "amount": 400,
+                "symbol": "water"
+            },
+            {
+                "name": "Hannah",
+                "nickname": "hannah",
+                "type": 4,
+                "amount": 350,
+                "symbol": "earth"
+            },
+            {
+                "name": "Ian",
+                "nickname": "ian",
+                "type": 1,
+                "amount": 275,
+                "symbol": "fire"
+            },
+            {
+                "name": "Julia",
+                "nickname": "julia",
+                "type": 3,
+                "amount": 320,
+                "symbol": "ice"
+            },
+            {
+                "name": "Kevin",
+                "nickname": "kevin",
+                "type": 2,
+                "amount": 410,
+                "symbol": "water"
+            }
+        ]
+    };
+    let validPlayers = [];
+    let rollCounts = [0, 0, 0, 0];
+    let sumData = [0, 0, 0, 0];
+
+    function validName() {
+        for (let i = 0; i < data.players.length; i++) {
+            let nickname = data.players[i].nickname;
+            if (!nickname.includes("5") && !nickname.includes("@")) {
+                validPlayers.push(data.players[i]);
+            }
+        }
+    }
+
+    function createCards() {
+        let cardsContainer = document.querySelector('.cards');
+
+        for (let i = 0; i < validPlayers.length; i++) {
+            let randomColor = `#${Math.floor(Math.random() * 12345678).toString(16)}`;
+            let createDiv = document.createElement("div");
+            createDiv.className = "card";
+            createDiv.style.backgroundColor = randomColor;
+            createDiv.innerHTML = `
+                <p>Name: ${validPlayers[i].name}</p>
+                <p>Nickname: ${validPlayers[i].nickname}</p>
+                <p>Amount: $${validPlayers[i].amount}</p>
+                <p>Type: ${validPlayers[i].type}</p>
+                <p></p>
+            `;
+            cardsContainer.appendChild(createDiv);
+        }
+    }
+
+    function startGame() {
+        let gameImage = document.getElementById('game-image');
+        let images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg'];
+
+        let rollInterval = setInterval(() => {
+            let randomIndex = Math.floor(Math.random() * images.length);
+            gameImage.src = images[randomIndex];
+        }, 100);
+
+        setTimeout(() => {
+            clearInterval(rollInterval);
+            let randomIndex = Math.floor(Math.random() * images.length);
+            gameImage.src = images[randomIndex];
+            let rolledNumber = randomIndex + 1;
+            rollCounts[rolledNumber - 1]++;
+            let matchingPlayers = validPlayers.filter(player => player.type === rolledNumber);
+            sumData[rolledNumber - 1] += matchingPlayers.reduce((sum, player) => sum + player.amount, 0);
+
+            let resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = `<p>Number is: ${rolledNumber}</p>`;
+
+            let rollElements = document.querySelectorAll("#roll");
+            rollElements.forEach(roll => roll.innerHTML = "");
+
+            for (let i = 0; i < validPlayers.length; i++) {
+                if (validPlayers[i].type === rolledNumber) {
+                    let playerCards = document.getElementsByClassName("card");
+                    let playerCard = playerCards[i];
+                    let rollElement = playerCard.getElementsByTagName("p")[4];
+                    rollElement.innerHTML += "+";
+                }
+            }
+
+        }, 2000);
+    }
+
+    function disqualifyPlayers() {
+        let cardsContainer = document.querySelector('.cards');
+        let playerCards = document.getElementsByClassName('card');
+
+        for (let i = playerCards.length - 1; i >= 0; i--) {
+            let rollElement = playerCards[i].getElementsByTagName('p')[4];
+            if (!rollElement.innerHTML.includes('+')) {
+                cardsContainer.removeChild(playerCards[i]);
+            }
+        }
+    }
+
+    function showStats() {
+        disqualifyPlayers();
+
+        let typeChartData = [{
+            x: ['Type 1', 'Type 2', 'Type 3', 'Type 4'],
+            y: rollCounts,
+            type: 'bar',
+            name: 'Roll Counts'
+        }];
+
+        let sumChartData = [{
+            x: ['Type 1', 'Type 2', 'Type 3', 'Type 4'],
+            y: sumData,
+            type: 'bar',
+            name: 'Sum of Amounts'
+        }];
+
+        document.getElementById('typeChart').innerHTML = '';
+        document.getElementById('sumChart').innerHTML = '';
+
+        Plotly.newPlot('typeChart', typeChartData, {
+            width: 300,
+            height: 300
+        });
+
+        Plotly.newPlot('sumChart', sumChartData, {
+            width: 300,
+            height: 300
+        });
+    }
+
+    validName();
+    createCards();
+</script>
+</body>
+</html>

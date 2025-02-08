@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crypto</title>
+    <style>
+        .coin-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 60%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .coin-item {
+            gap: 50px;
+        }
+
+        #coin-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .filter {
+            text-align: center;
+            width: 200px;
+            height: 100px;
+            margin: auto;
+        }
+
+        #price-chart,
+        #sparkline-chart {
+            display: inline-block;
+            width: 49%;
+        }
+
+        #coin-details {
+            text-align: center;
+            width: max-content;
+            height: max-content;
+            margin: auto;
+        }
+    </style>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</head>
+<body>
+<div class="filter">
+    <label for="sortOptions">Choose sorting parameter</label><br><br>
+    <select name="sortOption" id="sortOptions" onchange="updateCoinList()">
+        <option value="select">Select an option</option>
+        <option value="price">Price</option>
+        <option value="marketCap">Market Cap</option>
+        <option value="change">Change</option>
+    </select>
+</div>
+
+<div id="coin-list"></div>
+
+<div id="charts-container">
+    <div id="price-chart"></div>
+    <div id="sparkline-chart"></div>
+</div>
+
+<div id="coin-details"></div>
+
+<script>
+    let coinsData = [];
+    let sortedCoins = [];
+
+    async function fetchCoinsData() {
+        const response = await fetch("https://api.coinranking.com/v2/coins");
+        coinsData = await response.json();
+        updateCoinList();
+        updatePriceChart();
+        updateSparklineChart();
+    }
+
+    function updateCoinList() {
+        const sortOption = document.getElementById("sortOptions").value;
+        sortedCoins = coinsData.data.coins.map(coin => ({
+            name: coin.name,
+            icon: coin.iconUrl,
+            price: parseFloat(coin.price),
+            marketCap: parseFloat(coin.marketCap),
+            change: parseFloat(coin.change),
+            sparkline: coin.sparkline,
+            symbol: coin.symbol,
+            rank: coin.rank,
+            volume: parseFloat(coin["24hVolume"])
+        }));
+
+        if (sortOption === "price") {
+            sortedCoins.sort((a, b) => b.price - a.price);
+        } else if (sortOption === "marketCap") {
+            sortedCoins.sort((a, b) => b.marketCap - a.marketCap);
+        } else if (sortOption === "change") {
+            sortedCoins.sort((a, b) => b.change - a.change);
+        }
+
+        const coinListDiv = document.getElementById("coin-list");
+        coinListDiv.innerHTML = "";
+
+        for (let i = 0; i < 30; i++) {
+            let createDiv = document.createElement("div");
+            createDiv.classList.add("coin-item");  // Change to coin-item class
+            createDiv.innerHTML = `<img src="${sortedCoins[i].icon}" class="coin-icon" onclick="showCoinDetails(${i})">`;
+            coinListDiv.appendChild(createDiv);
+        }
+        animateIcons();
+    }
+
+    function showCoinDetails(index) {
+        const coin = sortedCoins[index];
+        const detailsDiv = document.getElementById("coin-details");
+        detailsDiv.innerHTML = `
+            <img src="${coin.icon}" style="width: 50px; height: 50px"> <br>
+            <span>Rank: ${coin.rank}</span><br><br>
+            <span>Name: ${coin.name}</span><br><br>
+            <span>Symbol: ${coin.symbol}</span><br><br>
+            <span>Market Price: ${coin.price}</span><br><br>
+            <span>Change Last 24h (in %): ${coin.change}%</span><br>
+        `;
+        updateSparklineChart(index);
+    }
+
+    function updatePriceChart() {
+        const coinNames = sortedCoins.map(coin => coin.name);
+        const coinPrices = sortedCoins.map(coin => coin.price);
+
+        const data = [{
+            x: coinNames,
+            y: coinPrices,
+            type: 'bar'
+        }];
+
+        const layout = {
+            title: "Top 30 Cryptocurrencies by Price",
+            xaxis: {title: "Cryptocurrency"},
+            yaxis: {title: "Price (USD)"}
+        };
+
+        Plotly.newPlot('price-chart', data, layout);
+    }
+
+    function updateSparklineChart(index = 0) {
+        const coin = sortedCoins[index];
+        const sparklineData = coin.sparkline;
+
+        const trace = {
+            y: sparklineData,
+            type: 'scatter'
+        };
+
+        const layout = {
+            title: `${coin.name} Price Movement`,
+            xaxis: {title: "Time"},
+            yaxis: {title: "Price (USD)"}
+        };
+
+        Plotly.newPlot('sparkline-chart', [trace], layout);
+    }
+
+    function animateIcons() {
+        anime({
+            targets: '.coin-icon',
+            duration: 500,
+            translateY: [-1000, 0],
+            easing: 'easeInOutQuad',
+            delay: anime.stagger(100)
+        });
+    }
+
+    fetchCoinsData();
+</script>
+</body>
+</html>

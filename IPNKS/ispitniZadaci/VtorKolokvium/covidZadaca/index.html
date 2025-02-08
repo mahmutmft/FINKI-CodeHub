@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        #coutnryFlag{
+
+        }
+        @keyframes animation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+<h1>Covid-19 Data Dashboard</h1>
+<button onclick="chartAll()">View All Countires</button>
+<select name="drzavi" id="selectDrzavi" onchange="chartCountry()">
+    <option value="viewall">View All</option>
+</select> <br> <br>
+<img src="#" alt="Country Flag" id="coutnryFlag" onclick="changeRadius()" style="border-radius: 0%">
+<div id="charts">
+
+</div>
+<script>
+    let covidData = []
+    document.getElementById("coutnryFlag").style.display = "none";
+    async function fetchData(){
+        let response = await fetch("https://disease.sh/v3/covid-19/countries");
+        covidData = await response.json();
+        dropDown();
+        chartAll();
+    }
+    function dropDown(){
+        let dropdown = document.getElementById("selectDrzavi");
+        covidData.forEach(drzava =>{
+            let option = `<option value="${drzava.country}">${drzava.country}</option>`;
+            dropdown.innerHTML += option;
+        })
+    }
+    function chartAll(){
+        let drzava = covidData.map(c => c.country);
+        let cases = covidData.map(c =>c.cases);
+        let deaths = covidData.map(c => c.deaths);
+        let recovered = covidData.map(c => c.recovered)
+
+        let trace1 = {x: drzava , y: cases, name: 'Cases' , type: 'bar'};
+        let trace2 = {x: drzava , y: deaths, name: 'Deaths' , type: 'bar'};
+        let trace3 = {x: drzava , y: recovered, name: 'Recovered' , type: 'bar'};
+
+        var data = [trace1, trace2, trace3];
+
+        var layout = {barmode: 'stack', title:'Covid-19 Data for all country'};
+
+        Plotly.newPlot('charts', data, layout);
+
+    }
+    function chartCountry(){
+        document.getElementById("coutnryFlag").style.display = "inline-block";
+        let flagAnime = document.getElementById("coutnryFlag");
+        flagAnime.style.animationName = 'animation';
+        flagAnime.style.animationDuration = '2s';
+
+        let drzava = document.getElementById("selectDrzavi").value;
+        let ime = covidData.filter(c => c.country === drzava);
+        let countryData = ime[0];
+        showFlag(countryData.countryInfo.flag);
+        let data = [
+            {
+                x: ['cases', 'deaths', 'recovered'],
+                y: [countryData.cases, countryData.deaths, countryData.recovered],
+                type: 'bar'
+            }
+        ];
+
+        Plotly.newPlot('charts', data);
+
+        console.log(ime);
+        console.log(drzava);
+    }
+    function showFlag(obj){
+        let photo = document.getElementById("coutnryFlag");
+        photo.setAttribute("src", obj);
+    }
+    function changeRadius(){
+        if(document.getElementById("coutnryFlag").style.borderRadius === '50%'){
+            document.getElementById("coutnryFlag").style.borderRadius = "0%";
+            document.getElementById("coutnryFlag").style.transitionDuration = "1s";
+
+        }else {
+            document.getElementById("coutnryFlag").style.borderRadius = "50%";
+            document.getElementById("coutnryFlag").style.animationDuration = "1s";
+
+        }
+    }
+    fetchData();
+</script>
+</body>
+</html>
