@@ -1,0 +1,128 @@
+#html {
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    background: url("containerbackground.gif");
+    width: 663px;
+    height: 1762px;
+    margin: auto;
+}
+
+#intro {
+    background: url("top.gif") no-repeat;
+    width: 605px;
+    height: 332px;
+    margin: auto;
+}
+
+#preamble h3 span, #explanation h3 span, #participation h3 span,
+#lselect h3 span, #lresources h3 span {
+    display: none;
+}
+
+#preamble {
+    background: url("title1.gif") no-repeat;
+    width: 389px;
+    height: 46px;
+    float: left;
+    margin-top: 332px;
+    margin-left: 9px;
+}
+
+#quickSummary {
+    background: url("summary.gif") no-repeat;
+    width: 192px;
+    height: 46px;
+    float: right;
+    margin-top: 331px;
+    margin-right: 7px;
+    padding-bottom: 100px;
+}
+
+#quickSummary p {
+    margin-top: 48px;
+    margin-left: 7px;
+}
+
+#preamble p {
+    margin-top: 44px;
+    margin-left: 5px;
+}
+
+#supportingText {
+    padding-top: 501px;
+}
+
+#explanation {
+    float: left;
+    background: url("title2.gif") no-repeat;
+    width: 389px;
+    height: 46px;
+    margin-top: -64px;
+    margin-left: 37px;
+}
+
+#explanation p {
+    margin-top: 56px;
+    margin-left: 5px;
+}
+
+#participation {
+    margin-top: 664px;
+    float: left;
+    background: url("title3.gif") no-repeat;
+    width: 389px;
+    margin-left: 37px;
+}
+
+#participation p {
+    margin-top: 56px;
+    margin-left: 7px;
+}
+
+#participation ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+#linkList2 {
+    background: url("designs.gif") no-repeat;
+    width: 192px;
+    height: 46px;
+    float: right;
+    margin-top: -239px;
+    margin-right: 36px;
+}
+
+#linkList2 #lselect ul {
+    margin-top: 57px;
+    margin-left: -2px;
+}
+
+#linkList2 #lselect ul li {
+    list-style-image: url("paper.gif");
+}
+
+#lresources ul li {
+    list-style-image: url("paperfolded.gif");
+}
+
+#lresources {
+    background: url("resources.gif");
+    width: 192px;
+    height: 46px;
+}
+
+#lresources ul {
+    padding-top: 58px;
+    padding-left: 37px;
+}
+
+#lresources ul li a {
+    color: black;
+    text-decoration: none;
+}
+
+

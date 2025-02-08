@@ -1,0 +1,23 @@
+body{
+    background-color: #CEDAE8;
+}
+.prvDel #naslov{
+    text-align: center;
+    border: 1px solid blue;
+    border-radius: 50px;
+    padding: 0;
+    color: #891988;
+    text-decoration: underline;
+    font-style: italic;
+    font-size: 30px;
+    font-weight: 900;
+}
+#naslov2{
+    border: 1px solid blue;
+    text-align: center;
+    color: #891988;
+    border-radius: 50px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}

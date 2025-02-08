@@ -1,0 +1,135 @@
+#css-fcse {
+    margin: 0;
+}
+
+[role = banner] {
+    background: url("./img/top.png") no-repeat;
+    width: 1000px;
+    height: 400px;
+    margin: auto;
+}
+
+#fcse-summary {
+    display: none;
+}
+
+#fcse-intro {
+    border-bottom: 5px solid blue;
+}
+
+#fcse-miniintro {
+    border-top: 5px solid green;
+    padding-right: 1000px;
+    float: left;
+    padding-left: 200px;
+    text-align: justify;
+    padding-bottom: 69px;
+}
+
+#fcse-miniintro h3, #fcse-people h3, #fcse-walter h3, #fcse-jessie h3, #fcse-history h3 {
+    font-size: 40px;
+    color: green;
+    font-weight: 300;
+}
+
+#fcse-people {
+    width: 35%;
+    float: right;
+    margin-right: 200px;
+    text-align: justify;
+    margin-top: -535px;
+}
+#fcse-supporting div:nth-of-type(2), #fcse-supporting div:nth-of-type(3){
+    background-color: skyblue;
+}
+#fcse-walter {
+    float: left;
+    padding-left: 200px;
+    text-align: justify;
+    padding-right: 1000px;
+    background: url("./img/walter.png") no-repeat 1000px 100px;
+    padding-bottom: 150px;
+}
+
+#fcse-jessie {
+    float: left;
+    padding-right: 200px;
+    text-align: justify;
+    padding-left: 1000px;
+    background: url("./img/jessie.png") no-repeat 400px 50px;
+    border-bottom: 5px solid blue;
+    padding-bottom: 150px;
+}
+
+.extra1::after {
+    content: " ";
+    position: absolute;
+    width: 300px;
+    border-top: 2px solid black;
+    left: 800px;
+    top: 1530px;
+}
+#fcse-history h3 {
+    text-align: center;
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 50px;
+}
+#fcse-history p:nth-of-type(1){
+    text-align: justify;
+    padding-left: 200px;
+    padding-right: 1000px;
+    padding-bottom: 100px;
+}
+#fcse-history p:nth-of-type(2){
+    width: 35%;
+    text-align: justify;
+    position: absolute;
+    left: 1003px;
+    top: 2230px;
+}
+.intro {
+    display: inline-block;
+}
+#fcse-footer{
+    padding-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 50px;
+    background-color: skyblue;
+    padding-bottom: 30px;
+}
+#fcse-footer a{
+    text-decoration: none;
+    color: white;
+}
+#bb-selection{
+    display: inline-block;
+    width: 35%;
+    padding-left: 200px;
+}
+#bb-selection li, #fcse-interviews li, #fcse-related li{
+    list-style-type: none;
+    line-height: 2;
+    font-size: 20px;
+}
+#bb-selection a , #fcse-interviews a, #fcse-related a{
+    color: green;
+    text-decoration: none;
+}
+#bb-selection h3,#fcse-interviews h3, #fcse-related h3{
+    padding-left: 40px;
+    font-size: 30px;
+}
+#fcse-interviews{
+    float: right;
+    padding-right: 100px;
+    width: 35%;
+}
+#fcse-related{
+    width: 35%;
+    padding-right: 100px;
+    float: right;
+}

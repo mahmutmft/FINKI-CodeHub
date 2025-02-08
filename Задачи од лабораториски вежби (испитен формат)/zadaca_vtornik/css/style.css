@@ -1,0 +1,174 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+section.navbar div {
+    display: flex;
+    justify-content: space-around;
+}
+
+.navbar a {
+    color: grey;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.navbar-header {
+    display: inline-block;
+}
+
+.navbar button {
+    display: none;
+}
+
+.navbar ul li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.navbar-brand {
+    margin-top: 15px;
+}
+
+section#home {
+    background: url("../images/home-bg.jpg") no-repeat 0px -200px;
+    width: 1920px;
+    height: 600px;
+}
+
+#home .row div {
+    text-align: center;
+}
+
+h3 {
+    color: greenyellow;
+    font-size: 30px;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+#home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+#home .container .row div a:nth-of-type(2) {
+    padding: 20px 30px;
+    text-decoration: none;
+    color: white;
+    background: black;
+    margin-left: 50px;
+}
+
+#home .container .row div a:nth-of-type(1) {
+    padding: 20px 30px;
+    text-decoration: none;
+    color: white;
+    background: green;
+}
+
+#about .container .row {
+    display: flex;
+    gap: 50px;
+    width: 1573px;
+}
+
+#about .container .row img {
+    background-size: contain;
+    width: 800px;
+}
+
+h2, h4 {
+    text-align: center;
+}
+
+#blog .blog-masonry img {
+    width: 300px;
+    height: 250px;
+    background-size: contain;
+}
+
+#blog .blog-masonry {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+#blog .post-masonry {
+    width: 300px;
+    border: 1px solid #bbacac;
+    padding: 30px;
+}
+
+#blog a {
+    text-decoration: none;
+    color: black;
+}
+
+#contact {
+    margin-top: 100px;
+}
+
+#contact .col-md-12 {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+#contact input {
+    margin-top: 10px;
+    border: 1px solid black;
+    padding: 10px;
+    width: 500px;
+    margin-bottom: 10px;
+}
+
+#contact textarea {
+    width: 515px;
+    height: 200px;
+}
+
+#contact .row {
+    display: flex;
+    gap: 100px;
+    justify-content: center;
+    margin: 50px;
+}
+
+#contact .contact-detail h2,
+#contact .contact-detail h4,
+#contact .contact-detail p {
+    text-align: left;
+}
+
+footer .row {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+footer .col-md-6{
+    width: 400px;
+}
+footer .link-list{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+footer a{
+    text-decoration: none;
+    color: grey;
+}
+hr{
+    display: none;
+}
+
+
+

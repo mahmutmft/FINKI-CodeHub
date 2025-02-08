@@ -1,0 +1,13 @@
+.body{
+    margin: auto;
+    width: 52%;
+}
+.prvDel #prvP{
+    background-color: #F5F5DB;
+}
+.prvDel #vtorP{
+    background-color: #5F95ED;
+}
+.vtorDel #boja{
+    color: blue;
+}

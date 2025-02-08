@@ -1,0 +1,191 @@
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body > div:nth-child(1) {
+    background: url("../images/home-bg.jpg") no-repeat 0px -650px;
+    width: 1920px;
+}
+
+#home.parallax-section .col-md-offset-1.col-md-10 {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding-top: 330px;
+    padding-bottom: 330px;
+    text-align: center;
+}
+
+#home.parallax-section div.home-wrapper {
+    display: inline-block;
+    background: white;
+    opacity: 50%;
+    padding: 30px 600px;
+}
+
+#home.parallax-section div.home-wrapper h3 {
+    text-transform: uppercase;
+    color: green;
+}
+
+#about.parallax-section {
+    width: 60%;
+    margin: auto;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+#about.parallax-section div.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 50px;
+}
+
+#about.parallax-section div.col-md-4 img {
+    width: 250px;
+}
+
+#about div.col-md-4 {
+    text-align: justify;
+}
+
+#about div.col-md-4 a {
+    padding: 10px;
+    background-color: grey;
+    color: black;
+    border-radius: 10px;
+    margin-top: 10px;
+    float: left;
+    text-decoration: none;
+}
+
+#about div.col-md-8 {
+    background-color: whitesmoke;
+    float: right;
+}
+
+#about div.col-md-8 .about-thumb {
+    margin: 50px;
+}
+
+#about div.col-md-8 .section-title h3 {
+    color: green;
+    text-transform: uppercase;
+}
+
+#about div.col-md-8 .section-title h2 {
+    font-size: 28px;
+}
+
+#work.parallax-section {
+    width: 60%;
+    margin: auto;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+#work.parallax-section div.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#work.parallax-section .col-md-3 {
+    margin: auto;
+}
+
+#work.parallax-section img {
+    width: 200px;
+}
+
+#work.parallax-section img {
+    width: 200px;
+}
+
+#contact.parallax-section {
+    background-color: whitesmoke;
+}
+
+#contact.parallax-section .container {
+    width: 60%;
+    margin: auto;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+textarea {
+    width: 1094px;
+    height: 200px;
+    border: 0 solid white;
+}
+
+#contact.parallax-section .col-md-6 {
+    display: inline-block;
+}
+
+#contact.parallax-section .col-md-6 input.form-control {
+    width: 512px;
+    padding: 15px;
+    margin: 20px 0;
+    border: 0 solid white;
+}
+
+#contact .col-md-offset-3 #submit {
+    width: 500px;
+    padding: 10px;
+    margin-left: 300px;
+    margin-top: 30px;
+    background: orange;
+    color: white;
+    border-radius: 10px;
+
+}
+
+#contact .col-md-offset-3 #submit:hover {
+    background: #ff8c00;
+    color: whitesmoke;
+}
+
+#footer {
+    background: black;
+}
+
+#footer div.container {
+    color: whitesmoke;
+    background: black;
+    width: 60%;
+    margin: auto;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+#footer .row {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid grey;
+}
+
+#footer div.col-md-4 {
+    width: 30%;
+    margin-bottom: 50px;
+}
+
+#footer h4 {
+    color: white;
+}
+
+#footer p {
+    color: grey;
+}
+
+.support-cus a {
+    text-decoration: none;
+    color: white;
+}
+
+#footer form button {
+    padding: 20px 100px;
+    border-radius: 30px;
+}

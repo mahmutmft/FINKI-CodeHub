@@ -1,0 +1,214 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+nav button {
+    display: none;
+}
+
+nav .container {
+    display: flex;
+    justify-content: space-around;
+}
+
+nav .container a img {
+    width: 200px;
+    height: 100px;
+}
+
+nav .container ul li {
+    display: inline-block;
+    margin-left: 40px;
+    margin-top: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+}
+
+nav {
+    background: url("../assets/img/header-bg.jpg") no-repeat;
+    width: 1900px;
+    height: 100vh;
+    z-index: 0;
+}
+
+header {
+    position: relative;
+    z-index: 2;
+    margin-top: -534px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 34vh;
+}
+
+.masthead-heading,
+.masthead-subheading {
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+
+header a {
+    display: flex;
+    justify-content: center;
+    padding: 20px 30px;
+    background: #e8e81c;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+#services .row {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+}
+
+#services .row .col-md-4 {
+    width: 20%;
+}
+
+#services > div:nth-child(1) > div:nth-child(1) > h2:nth-child(1) {
+    text-transform: uppercase;
+    font-size: 40px;
+}
+
+#services > div:nth-child(1) > div:nth-child(1) > h3:nth-child(2) {
+    font-style: italic;
+}
+
+#services h4 {
+    font-size: 30px;
+}
+
+#services p {
+    color: grey;
+}
+
+#portfolio .container h2 {
+    text-align: center;
+    font-size: 40px;
+}
+
+#portfolio .container h3 {
+    text-align: center;
+    font-style: italic;
+}
+
+#portfolio .row {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+#portfolio .row .col-lg-4 {
+    text-align: center;
+}
+
+#portfolio img {
+    width: 446px;
+}
+
+#portfolio {
+    margin-bottom: 300px;
+}
+
+#team > div:nth-child(1) > div:nth-child(1) > h2:nth-child(1) {
+    text-transform: uppercase;
+}
+
+#team > div:nth-child(1) > div:nth-child(1) > h3:nth-child(2) {
+    font-style: italic;
+}
+
+#team {
+    margin-bottom: 300px;
+}
+
+#team .row {
+    display: flex;
+    gap: 100px;
+    justify-content: space-evenly;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px 300px;
+}
+
+#team .row .col-lg-4 {
+    width: 30%;
+}
+
+#team .row .team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#team .row h4, #team .row p {
+    text-align: center;
+}
+
+#team img {
+    width: 70%;
+    border-radius: 50%;
+    border: 3px solid gray;
+}
+
+.py-5 .container .row {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+.py-5 img {
+    width: 200px;
+    align-items: center;
+}
+#contact{
+    background: grey;
+}
+#contact .container{
+    background: url("../assets/img/map-image.png") no-repeat;
+    width: 1469px;
+    height: 720px;
+}
+#contactForm{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+}
+#contactForm input{
+    width: 400px;
+    height: 50px;
+    margin: 20px;
+}
+#contact .invalid-feedback{
+    display: none;
+}
+#message{
+    position: relative;
+    margin-left: 100px;
+}
+#submitButton{
+    position: absolute;
+    left: 0;
+}
+#message{
+    position: absolute;
+    left: 860px;
+    width: 400px;
+    height: 261px;
+    margin-top: -271px;
+}
