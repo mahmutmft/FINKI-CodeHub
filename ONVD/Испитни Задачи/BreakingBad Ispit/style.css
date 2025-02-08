@@ -3,7 +3,7 @@
 }
 
 [role = banner] {
-    background: url("./img/top.png") no-repeat;
+    background: url("img/top.png") no-repeat;
     width: 1000px;
     height: 400px;
     margin: auto;
@@ -47,7 +47,7 @@
     padding-left: 200px;
     text-align: justify;
     padding-right: 1000px;
-    background: url("./img/walter.png") no-repeat 1000px 100px;
+    background: url("img/walter.png") no-repeat 1000px 100px;
     padding-bottom: 150px;
 }
 
@@ -56,7 +56,7 @@
     padding-right: 200px;
     text-align: justify;
     padding-left: 1000px;
-    background: url("./img/jessie.png") no-repeat 400px 50px;
+    background: url("img/jessie.png") no-repeat 400px 50px;
     border-bottom: 5px solid blue;
     padding-bottom: 150px;
 }
