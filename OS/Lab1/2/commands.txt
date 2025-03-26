@@ -1,0 +1,20 @@
+1. mkdir results cd results touch OS1.txt OS2.txt
+
+2.Copy-Paste на содржината од фајловите и со нано ја ставаме неа
+
+3.Заедно: cat OS1.txt OS2.txt 
+
+Со празно место: cat OS1.txt; echo; cat OS2.txt
+
+4.touch total.txt cat OS1.txt OS2.txt >> total.txt
+
+5.mkdir results_2023 mv total.txt results_2023/
+
+6.wc total.txt 
+
+7.grep ^22 total.txt
+
+8.grep ^23 total.txt | awk '{if($4 > 50) print($1,$2,$4)}'
+
+9.awk '$3 == "in_progress"' total.txt | wc
+

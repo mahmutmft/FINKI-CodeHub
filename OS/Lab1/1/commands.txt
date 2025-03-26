@@ -1,0 +1,13 @@
+1.mkdir directory1 mkdir directory2 cd directory1 touch file123
+
+2.man ls
+
+3.chmod ug=rw file123  chmod o= file123
+
+4.chmod 660 file123
+
+5.w who users
+
+6.mv file123 ../directory2/file234
+
+7.cd .. rm -fr directory1
