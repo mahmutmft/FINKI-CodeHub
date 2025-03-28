@@ -28,4 +28,4 @@ awk -F, '{
             print proc, procesori[proc];
         }
     }
-' files/laptops.csv | sort
+' ../files/laptops.csv | sort
