@@ -1,0 +1,6 @@
+StudentID,Name,Math,Science,English,History
+1001,Top Scorer,100,100,100,100
+1002,Low Scorer,0,0,0,0
+1003,Mixed Scores,100,0,100,0
+1004,Near Perfect,99,99,99,99
+1005,Near Fail,1,1,1,1

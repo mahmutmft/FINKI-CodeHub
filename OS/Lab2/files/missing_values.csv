@@ -1,0 +1,6 @@
+StudentID,Name,Math,Science,English,History
+1001,Alice Johnson,85,,78,88
+1002,Bob Smith,,85,92,79
+1003,Charlie Brown,75,80,,95
+1004,Diana Prince,88,91,80,
+1005,Ethan Hunt,,,75,90

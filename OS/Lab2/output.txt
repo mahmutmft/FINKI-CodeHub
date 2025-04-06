@@ -1,0 +1,15 @@
+END{
+    print "Exam Score Analysis";
+    print "-------------------";
+    print "Total Number of Students: "; //number of students veriable
+    print "Subject Averages:"
+    print "\t Math: \t"; //average of math veraible
+    print "\t Science: \t"; //average of Science veraible
+    print "\t English: \t"; //average of english veraible
+    print "\t History: \t"' //average of history veraible
+    print "Subject Extreme Performers: ";
+    // print "Math - Highest: ",   //higest score math  , "Lowest: " //lowest score math
+    // print "Science - Highest: ",   //higest score math  , "Lowest: " //lowest score math
+    // print "English - Highest: ",   //higest score math  , "Lowest: " //lowest score math
+    // print "History - Highest: ",   //higest score math  , "Lowest: " //lowest score math
+}
