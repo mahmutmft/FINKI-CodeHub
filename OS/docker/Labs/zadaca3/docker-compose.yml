@@ -1,0 +1,35 @@
+services:
+  sensor:
+    build:
+      context: ./sensor
+    volumes:
+      - temperature:/data
+    container_name: temperature_sensor
+    networks:
+      - temperature-level-network
+    environment:
+      - LOW_TEMPERATURE=5
+      - MEDIUM_TEMPERATURE=19
+      - HIGH_TEMPERATURE=35
+
+  monitor:
+    build:
+      context: ./monitor
+    volumes:
+      - temperature:/data
+      - temperaturelevel:/data
+    container_name: temperature_monitor
+    networks:
+      - temperature-level-network
+    environment:
+      - LOW_TEMPERATURE=5
+      - MEDIUM_TEMPERATURE=19
+      - HIGH_TEMPERATURE=35
+
+volumes:
+  temperature:
+  temperaturelevel:
+
+networks:
+  temperature-level-network:
+    driver: bridge
