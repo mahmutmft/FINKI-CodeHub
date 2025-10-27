@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservations</title>
+</head>
+<body>
+<div>
+    <h1 th:text="${bookTitle}">Reservations for:</h1>
+
+    <table>
+        <tr>
+            <th>Reader Name</th>
+            <th>Address</th>
+            <th>Copies</th>
+        </tr>
+
+        <tr th:each="element : ${reservations}">
+            <td th:text="${element.readerName}">Test</td>
+            <td th:text="${element.readerAddress}">Test</td>
+            <td th:text="${element.numberOfCopies}">1</td>
+        </tr>
+
+        <tr th:if="${#lists.isEmpty(reservations)}">
+            <td>No Reservations</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
