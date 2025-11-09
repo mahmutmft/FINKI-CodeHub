@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Book Reservation - Welcome and choose a Book</title>
+    <style type="text/css">
+      body {
+        width: 800px;
+        margin: auto;
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        color: #333;
+      }
+      form {
+        margin-top: 20px;
+      }
+      .book-option {
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .book-option:hover {
+        background-color: #f5f5f5;
+      }
+      .button-link {
+        display: inline-block;
+        padding: 8px 12px;
+        background-color: #4caf50;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to our Book Reservation App</h1>
+    </header>
+    <main>
+      <div th:if="${error}" style="color: red; font-weight: bold">
+        <p th:text="${error}">Error</p>
+      </div>
+      <h2>Search Books:</h2>
+      <form method="GET" th:action="@{/books}" style="margin-bottom: 20px">
+        <label>Search Text:</label>
+        <input
+          type="text"
+          name="searchText"
+          placeholder="Enter book title"
+          th:value="${searchText}"
+        /><br />
+        <label>Minimum Rating:</label>
+        <input
+          type="number"
+          name="searchRating"
+          step="0.1"
+          min="0"
+          max="5"
+          placeholder="Enter rating"
+          th:value="${searchRating}"
+        /><br />
+        <input type="submit" value="Search" />
+      </form>
+      <p>
+        <a th:href="@{/lab}">View all current reservations</a>
+      </p>
+
+      <div style="margin-bottom: 15px">
+        <a class="button-link" th:href="@{/books/book-form}">Add New Book</a>
+      </div>
+
+      <form th:action="@{/bookReservation}" method="POST">
+        <h2>Choose a book:</h2>
+        <!-- Display radio buttons for each book,
+             the value should be the book title
+             and the displayed text should be:
+             Title: <book_title>, Genre: <book_genre>, Rating: <average_rating> -->
+
+        <div th:each="b, iterStat : ${books}" class="book-option">
+          <label>
+            <input
+              type="radio"
+              name="bookTitle"
+              th:value="${b.title}"
+              required
+            />
+            <span>
+              Title: <span th:text="${b.title}"></span>, Genre:
+              <span th:text="${b.genre}"></span>, Rating:
+              <span th:text="${b.averageRating}"></span>, Author:
+              <span th:text="${b.author.name + ' ' + b.author.surname}"></span>
+            </span>
+          </label>
+          <div>
+            <a th:href="@{/lab(bookTitle=${b.title})}">View reservations for this book</a>
+            |
+            <a th:href="@{'/books/book-form/' + ${b.id}}">Edit</a>
+            |
+            <button type="submit" th:attr="form=${'deleteForm_' + iterStat.index}">
+              Delete
+            </button>
+          </div>
+        </div>
+
+        <h2>Enter your information:</h2>
+        <label>Your Name:</label>
+        <input type="text" name="readerName" required /><br />
+        <label>Your Address:</label>
+        <input type="text" name="readerAddress" required /><br />
+
+        <h2>Choose number of copies:</h2>
+        <input type="number" name="numCopies" min="1" max="10" required /><br />
+        <br />
+        <input type="submit" value="Reserve Book" />
+      </form>
+
+      <div th:each="b, iterStat : ${books}" style="display: none">
+        <form
+          th:attr="id=${'deleteForm_' + iterStat.index}"
+          th:action="@{'/books/delete/' + ${b.id}}"
+          method="POST"
+        ></form>
+      </div>
+    </main>
+  </body>
+</html>
