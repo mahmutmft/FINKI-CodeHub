@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title th:text="${isEdit} ? 'Edit Book' : 'Add Book'">Book Form</title>
+    <style>
+      body {
+        width: 800px;
+        margin: auto;
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        color: #333;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      label {
+        font-weight: bold;
+      }
+      input,
+      select {
+        padding: 8px;
+        font-size: 14px;
+      }
+      .actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .actions a {
+        padding: 8px 12px;
+        border: 1px solid #333;
+        text-decoration: none;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 th:text="${isEdit} ? 'Edit Book' : 'Add Book'">Book Form</h1>
+    </header>
+    <main>
+      <form
+        th:action="${isEdit} ? @{'/books/edit/' + ${book.id}} : @{/books/add}"
+        method="POST"
+      >
+        <label for="title">Title</label>
+        <input
+          id="title"
+          type="text"
+          name="title"
+          th:value="${book.title}"
+          required
+        />
+
+        <label for="genre">Genre</label>
+        <input
+          id="genre"
+          type="text"
+          name="genre"
+          th:value="${book.genre}"
+          required
+        />
+
+        <label for="averageRating">Average Rating</label>
+        <input
+          id="averageRating"
+          type="number"
+          name="averageRating"
+          min="0"
+          max="5"
+          step="0.1"
+          th:value="${book.averageRating}"
+          required
+        />
+
+        <label for="authorId">Author</label>
+        <select id="authorId" name="authorId" required>
+          <option value="" disabled th:if="${book.author == null}" selected>
+            Select Author
+          </option>
+          <option
+            th:each="author : ${authors}"
+            th:value="${author.id}"
+            th:selected="${book.author != null} ? (author.id == book.author.id) : false"
+            th:text="${author.name + ' ' + author.surname + ' (' + author.country + ')'}"
+          >
+            Author Name
+          </option>
+        </select>
+
+        <div class="actions">
+          <button type="submit" th:text="${isEdit} ? 'Update Book' : 'Create Book'">
+            Save
+          </button>
+          <a th:href="@{/books}">Cancel</a>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

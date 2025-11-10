@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservations</title>
+    <style>
+        body {
+            width: 800px;
+            margin: auto;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .nav {
+            margin-bottom: 15px;
+        }
+
+        .nav a {
+            color: #2d6cdf;
+            text-decoration: none;
+        }
+
+        .nav a:hover {
+            text-decoration: underline;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table,
+        td,
+        th {
+            border: 1px solid #333;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+            padding: 12px;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .empty-row td {
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+<section>
+    <header>
+        <h1 th:text="${showAll} ? 'All Reservations' : 'Reservations for: ' + bookTitle">Reservations</h1>
+        <div class="nav">
+            <a th:href="@{/books}">← Back to book list</a>
+        </div>
+    </header>
+
+    <table>
+        <tr>
+            <th>Reader Name</th>
+            <th>Address</th>
+            <th>Copies</th>
+        </tr>
+
+        <tr th:each="element : ${reservations}">
+            <td th:text="${element.readerName}">Reader</td>
+            <td th:text="${element.readerAddress}">Address</td>
+            <td th:text="${element.numberOfCopies}">1</td>
+        </tr>
+
+        <tr class="empty-row" th:if="${#lists.isEmpty(reservations)}">
+            <td colspan="3">No reservations available</td>
+        </tr>
+    </table>
+</section>
+</body>
+</html>
