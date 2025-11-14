@@ -34,23 +34,30 @@ Welcome to my centralized hub for all programming coursework at the Faculty of C
     <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black"/>
 </div>
 
-## 📂 Repository Structure
+## 📂 Repository Layout
 ```
 FINKI-CodeHub/
-├── APS/                    # Algorithms and Data Structures
-│   ├── src/               # Source code
-│   ├── resources/         # Course materials
-│   └── exercises/         # Practice problems
-├── IPNKS/                 # Client-Side Internet Programming
-│   ├── labs/             # Laboratory exercises
-│   └── projects/         # Course projects
-├── OOP/                   # Object-Oriented Programming
-│   ├── labs/             # Laboratory work
-│   └── exercises/        # Practice problems
-└── ONVD/                  # Web Design Fundamentals
-    ├── labs/             # Laboratory work
-    └── projects/         # Course projects
+├── README.md
+├── subjects/              # All course-specific code and notes
+│   ├── aps/               # Algorithms and Data Structures
+│   ├── aps2/              # Advanced Algorithms & DS
+│   ├── ipnks/             # Client-Side Internet Programming
+│   ├── nvd/               # Design of Digital Systems
+│   ├── onvd/              # Web Design Fundamentals
+│   ├── oop/               # Object-Oriented Programming
+│   ├── os/                # Operating Systems
+│   ├── np/                # Numerical Methods / other math courses
+│   ├── si/                # Software Engineering
+│   └── vp/                # Visual Programming index + lab links
+├── labs/
+│   └── vp/
+│       ├── lab-a/         # Latest WP Lab A (likes + improvements)
+│       └── lab-a-legacy/  # Archived version that used to live in VP/LAB A
+└── resources/
+    └── materials/         # Lecture slides, PDFs, diagrams, etc.
 ```
+
+Each subject folder keeps its original internal structure so no exercises or history are lost—only the top-level navigation has been consolidated. Subject codes remain in lowercase to make SSH / CLI jumps faster (`cd subjects/os`), while the README acts as the index for anyone browsing the repo. When a lab exists in multiple iterations (e.g., Visual Programming Lab A), the most recent code lives under `labs/<course>/<lab>` and older versions are archived beside it for safe keeping.
 
 ## 🤝 Contributing
 While this is primarily a personal academic repository, contributions are welcome in the form of:
@@ -84,4 +91,3 @@ Please open an issue before submitting any changes.
     </p>
     <p>Remember: It's not a bug, it's a feature! 🐛✨</p>
 </div>
-
