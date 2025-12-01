@@ -32,6 +32,7 @@ public class BookController {
     public String getBooksPage(@RequestParam(required = false) String error,
                                @RequestParam(required = false) String searchText,
                                @RequestParam(required = false) String searchRating,
+                               @RequestParam(required = false) Long authorId,
                                Model model) {
 
         Double ratingFilter = null;
@@ -44,7 +45,9 @@ public class BookController {
         }
 
         List<Book> books;
-        if (searchText != null && !searchText.isBlank() && ratingFilter != null) {
+        if (authorId != null) {
+            books = bookService.listAllByAuthorId(authorId);
+        } else if ((searchText != null && !searchText.isBlank()) || ratingFilter != null) {
             books = bookService.searchBooks(searchText, ratingFilter);
         } else {
             books = bookService.listAll();
@@ -54,6 +57,8 @@ public class BookController {
         model.addAttribute("error", error);
         model.addAttribute("searchText", searchText);
         model.addAttribute("searchRating", searchRating);
+        model.addAttribute("authorId", authorId);
+        model.addAttribute("authors", authorService.findAll());
 
         return "listBooks";
     }

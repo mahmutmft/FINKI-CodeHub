@@ -1,0 +1,9 @@
+pkill -9 java
+lsof -i :1010
+cd /Users/mahmutmiftaroski/Documents/VP/FINKI-CodeHub/labs/vp/lab-a
+mvn clean
+mvn spring-boot:run -Dspring-boot.run.profiles=h2
+
+# open in browser
+http://localhost:1010/books
+http://localhost:1010/h2-console

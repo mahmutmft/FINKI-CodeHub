@@ -69,6 +69,17 @@
             placeholder="Enter rating"
             th:value="${searchRating}"
     /><br />
+    <label>Author:</label>
+    <select name="authorId">
+      <option value="" th:selected="${authorId == null}">All authors</option>
+      <option
+              th:each="author : ${authors}"
+              th:value="${author.id}"
+              th:text="${author.name + ' ' + author.surname}"
+              th:selected="${authorId != null and author.id == authorId}">
+      </option>
+    </select>
+    <br />
     <input type="submit" value="Search" />
   </form>
   <p>
@@ -109,9 +120,12 @@
         <button type="submit" th:attr="form=${'deleteForm_' + iterStat.index}">Delete</button>
         |
 
-        <form th:action="@{'/books/' + ${b.id} + '/like'}" method="post" style="display:inline">
-          <button type="submit" class="like-button">Like</button>
-        </form>
+        <button
+                type="submit"
+                class="like-button"
+                th:attr="form=${'likeForm_' + iterStat.index}">
+          Like
+        </button>
         |
         <span th:text="${b.likes}">0</span> Likes <!-- Show number of likes -->
       </div>
@@ -133,6 +147,11 @@
     <form
             th:attr="id=${'deleteForm_' + iterStat.index}"
             th:action="@{'/books/delete/' + ${b.id}}"
+            method="POST"
+    ></form>
+    <form
+            th:attr="id=${'likeForm_' + iterStat.index}"
+            th:action="@{'/books/' + ${b.id} + '/like'}"
             method="POST"
     ></form>
   </div>

@@ -8,11 +8,13 @@ import mk.ukim.finki.wp.lab1_1.repository.AuthorRepository;
 import mk.ukim.finki.wp.lab1_1.repository.BookRepository;
 import mk.ukim.finki.wp.lab1_1.service.BookService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
@@ -28,8 +30,25 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<Book> listAllByAuthorId(Long authorId) {
+        return bookRepository.findAllByAuthor_Id(authorId);
+    }
+
+    @Override
     public List<Book> searchBooks(String text, Double rating) {
-        return bookRepository.searchBooks(text, rating);
+        boolean hasText = text != null && !text.isBlank();
+        boolean hasRating = rating != null;
+
+        if (hasText && hasRating) {
+            return bookRepository.findByTitleContainingIgnoreCaseAndAverageRatingGreaterThanEqual(text, rating);
+        }
+        if (hasText) {
+            return bookRepository.findByTitleContainingIgnoreCase(text);
+        }
+        if (hasRating) {
+            return bookRepository.findByAverageRatingGreaterThanEqual(rating);
+        }
+        return bookRepository.findAll();
     }
 
     @Override
@@ -68,7 +87,6 @@ public class BookServiceImpl implements BookService {
     public Book like(Long bookId) {
         Book book = bookRepository.findById(bookId).orElseThrow();
         book.setLikes(book.getLikes() + 1);
-        // бидејќи е InMemory, доволно е сетот; но ќе повикаме save за конзистентност
         return bookRepository.save(book);
     }
 
