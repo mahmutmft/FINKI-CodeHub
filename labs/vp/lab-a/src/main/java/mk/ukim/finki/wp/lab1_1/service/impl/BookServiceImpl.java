@@ -35,18 +35,18 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> searchBooks(String text, Double rating) {
-        boolean hasText = text != null && !text.isBlank();
-        boolean hasRating = rating != null;
+    public List<Book> searchBooks(String title, String authorName) {
+        boolean hasTitle = title != null && !title.isBlank();
+        boolean hasAuthorName = authorName != null && !authorName.isBlank();
 
-        if (hasText && hasRating) {
-            return bookRepository.findByTitleContainingIgnoreCaseAndAverageRatingGreaterThanEqual(text, rating);
+        if (hasTitle && hasAuthorName) {
+            return bookRepository.findByTitleContainingIgnoreCaseAndAuthor_NameContainingIgnoreCase(title, authorName);
         }
-        if (hasText) {
-            return bookRepository.findByTitleContainingIgnoreCase(text);
+        if (hasTitle) {
+            return bookRepository.findByTitleContainingIgnoreCase(title);
         }
-        if (hasRating) {
-            return bookRepository.findByAverageRatingGreaterThanEqual(rating);
+        if (hasAuthorName) {
+            return bookRepository.findByAuthor_NameContainingIgnoreCase(authorName);
         }
         return bookRepository.findAll();
     }

@@ -10,9 +10,9 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByTitleContainingIgnoreCase(String title);
 
-    List<Book> findByAverageRatingGreaterThanEqual(Double rating);
+    List<Book> findByAuthor_NameContainingIgnoreCase(String authorName);
 
-    List<Book> findByTitleContainingIgnoreCaseAndAverageRatingGreaterThanEqual(String title, Double rating);
+    List<Book> findByTitleContainingIgnoreCaseAndAuthor_NameContainingIgnoreCase(String title, String authorName);
 
     List<Book> findAllByAuthor_Id(Long authorId);
 }

@@ -59,15 +59,12 @@
             placeholder="Enter book title"
             th:value="${searchText}"
     /><br />
-    <label>Minimum Rating:</label>
+    <label>Author Name:</label>
     <input
-            type="number"
-            name="searchRating"
-            step="0.1"
-            min="0"
-            max="5"
-            placeholder="Enter rating"
-            th:value="${searchRating}"
+            type="text"
+            name="authorName"
+            placeholder="Enter author name"
+            th:value="${authorName}"
     /><br />
     <label>Author:</label>
     <select name="authorId">

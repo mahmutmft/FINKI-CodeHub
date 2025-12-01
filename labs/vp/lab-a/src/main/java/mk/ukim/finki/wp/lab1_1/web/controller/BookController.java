@@ -31,24 +31,15 @@ public class BookController {
     @GetMapping("/books")
     public String getBooksPage(@RequestParam(required = false) String error,
                                @RequestParam(required = false) String searchText,
-                               @RequestParam(required = false) String searchRating,
+                               @RequestParam(required = false) String authorName,
                                @RequestParam(required = false) Long authorId,
                                Model model) {
-
-        Double ratingFilter = null;
-        if (searchRating != null && !searchRating.isBlank()) {
-            try {
-                ratingFilter = Double.parseDouble(searchRating);
-            } catch (NumberFormatException ignored) {
-                ratingFilter = null;
-            }
-        }
 
         List<Book> books;
         if (authorId != null) {
             books = bookService.listAllByAuthorId(authorId);
-        } else if ((searchText != null && !searchText.isBlank()) || ratingFilter != null) {
-            books = bookService.searchBooks(searchText, ratingFilter);
+        } else if ((searchText != null && !searchText.isBlank()) || (authorName != null && !authorName.isBlank())) {
+            books = bookService.searchBooks(searchText, authorName);
         } else {
             books = bookService.listAll();
         }
@@ -56,7 +47,7 @@ public class BookController {
         model.addAttribute("books", books);
         model.addAttribute("error", error);
         model.addAttribute("searchText", searchText);
-        model.addAttribute("searchRating", searchRating);
+        model.addAttribute("authorName", authorName);
         model.addAttribute("authorId", authorId);
         model.addAttribute("authors", authorService.findAll());
 
