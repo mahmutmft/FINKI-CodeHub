@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <title th:text="${isEdit} ? 'Edit Book' : 'Add Book'">Book Form</title>
@@ -47,6 +47,7 @@
         th:action="${isEdit} ? @{'/books/edit/' + ${book.id}} : @{/books/add}"
         method="POST"
       >
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <label for="title">Title</label>
         <input
           id="title"

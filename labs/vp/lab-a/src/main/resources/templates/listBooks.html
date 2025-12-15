@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="utf-8" />
   <title>Book Reservation - Welcome and choose a Book</title>
@@ -84,10 +84,11 @@
   </p>
 
   <div style="margin-bottom: 15px">
-    <a class="button-link" th:href="@{/books/book-form}">Add New Book</a>
+    <a class="button-link" th:href="@{/books/book-form}" sec:authorize="hasRole('ADMIN')">Add New Book</a>
   </div>
 
   <form th:action="@{/bookReservation}" method="POST">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     <h2>Choose a book:</h2>
     <!-- Display radio buttons for each book,
          the value should be the book title
@@ -111,12 +112,13 @@
       </label>
       <div>
         <a th:href="@{/lab(bookTitle=${b.title})}">View reservations for this book</a>
+        <span sec:authorize="hasRole('ADMIN')">
+          |
+          <a th:href="@{'/books/book-form/' + ${b.id}}">Edit</a>
+          |
+          <button type="submit" th:attr="form=${'deleteForm_' + iterStat.index}">Delete</button>
+        </span>
         |
-        <a th:href="@{'/books/book-form/' + ${b.id}}">Edit</a>
-        |
-        <button type="submit" th:attr="form=${'deleteForm_' + iterStat.index}">Delete</button>
-        |
-
         <button
                 type="submit"
                 class="like-button"
@@ -145,12 +147,16 @@
             th:attr="id=${'deleteForm_' + iterStat.index}"
             th:action="@{'/books/delete/' + ${b.id}}"
             method="POST"
-    ></form>
+    >
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    </form>
     <form
             th:attr="id=${'likeForm_' + iterStat.index}"
             th:action="@{'/books/' + ${b.id} + '/like'}"
             method="POST"
-    ></form>
+    >
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    </form>
   </div>
 </main>
 </body>
